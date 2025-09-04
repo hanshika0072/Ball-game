@@ -1,0 +1,43 @@
+
+body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #1e1e2f;
+      color: white;
+      overflow: hidden;
+    }
+    #game {
+      width: 400px;
+      height: 600px;
+      background: #2d2d3a;
+      border: 3px solid #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    #basket {
+      width: 80px;
+      height: 20px;
+      background: #ff9800;
+      position: absolute;
+      bottom: 10px;
+      left: 160px;
+      border-radius: 8px;
+    }
+    .ball {
+      width: 20px;
+      height: 20px;
+      background: #4caf50;
+      position: absolute;
+      top: 0;
+      border-radius: 50%;
+    }
+    #scoreBoard {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-weight: bold;
+    }
