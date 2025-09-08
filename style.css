@@ -1,65 +1,89 @@
+#basket {
+  width: 100px;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  left: 150px;
+
+  /* Dustbin look */
+  background: linear-gradient(to top, #444, #666);
+  border-radius: 0 0 15px 15px;   /* rounded bottom */
+  box-shadow: inset 0 5px 10px rgba(0,0,0,0.5),
+              0 5px 15px rgba(0,0,0,0.4);
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Dustbin lid */
+#basket::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  width: 120px;
+  height: 20px;
+  background: #555;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+}
 
 body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #1e1e2f;
-      color: white;
-      overflow: hidden;
-    }
-    /* #scoreBoard {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-weight: bold;
-    } */
-    
-    #game {
-      width: 400px;
-      height: 600px;
-      background: #2d2d3a;
-      position: relative;
-      overflow: hidden;
-      margin: auto;
-    }
-    #basket {
-      width: 80px;
-      height: 20px;
-      background: #ff9800;
-      position: absolute;
-      bottom: 0;
-      left: 160px;
-    }
-    .ball {
-      width: 20px;
-      height: 20px;
-     background: #4caf50;
-      border-radius: 50%;
-      position: absolute;
-      top: 0;
-    }
-    #controls {
-      display: flex;
-      justify-content: space-between;
-      width: 400px;
-      margin: 10px auto;
-      /* display: none; */
-    }
-    button {
-      width: 100px;
-      height: 50px;
-      font-size: 18px;
-    }
-@media (max-width: 360px) {
+  margin: 0;
+  height: 100vh;
+  background: #1e1e2f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-   body{
-    width: 100%;
-    height: 100vh;
-    margin: auto;
-   }
-    }
+#game {
+  width: 400px;
+  height: 600px;
+  background: #2d2d3a;
+  position: relative;
+  overflow: hidden;
+}
 
+#scoreBoard {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-weight: bold;
+}
 
+/* Dustbin (basket) */
+#basket {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 150px;
+  border: 3px dashed #e4e4e4; /* 👈 visible border for testing */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  background: transparent; /* invisible */
+}
+
+/* Storage inside dustbin */
+#storage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Falling balls */
+.ball {
+  width: 20px;
+  height: 20px;
+  background: #4caf50;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
