@@ -53,15 +53,12 @@ body {
       height: 50px; */
       font-size: 18px;
     }
-/* @media (max-width: 360px) {
-     #controls {
-      display: flex;
-      justify-content: space-between;
-      width: 400px;
-      margin: 10px auto;
-      display: none;
-   
+@media (max-width: 360px) {
+   button {
+      width: 100px;
+      height: 50px;
+      font-size: 18px;
     }
-    } */
+    }
 
 
