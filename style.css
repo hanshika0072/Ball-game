@@ -88,10 +88,11 @@ body {
   top: 0;
 }
 
-/* @media (max-width: 360px) {
-  #game {
-   width: 100%;
-   margin: auto;
-   background-color: red;
-  }
-} */
+@media (max-width: 360px) {
+ body{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+ }
+}
