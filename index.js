@@ -509,14 +509,22 @@
   window.addEventListener('mouseup', pointerUp);
 
   // Tapping canvas also launches ball if stuck
-  canvas.addEventListener('click', (e) => {
-    if (!game.running) {
-      overlay.style.display = 'none';
-      startGame();
-      return;
-    }
-    if (ball.stuck) launchBall();
-  });
+function handleLaunch() {
+  if (!game.running) {
+    overlay.style.display = 'none';
+    startGame();
+    return;
+  }
+  if (ball.stuck) launchBall();
+}
+
+canvas.addEventListener('click', handleLaunch);
+canvas.addEventListener('touchstart', (e) => {
+  // Ignore if dragging paddle
+  if (paddle.dragging) return;
+  handleLaunch();
+}, { passive: false });
+
 
   // Keep canvas sizing right on start
   function adjustAndStart() {
