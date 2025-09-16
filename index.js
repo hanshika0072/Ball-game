@@ -2,7 +2,7 @@
   const canvas = document.getElementById('c');
   const ctx = canvas.getContext('2d', { alpha: true });
 
-  // HUD elements
+
   const scoreEl = document.getElementById('score');
   const livesEl = document.getElementById('lives');
   const levelEl = document.getElementById('level');
@@ -12,7 +12,7 @@
   const pauseBtn = document.getElementById('pauseBtn');
   const restartBtn = document.getElementById('restartBtn');
 
-  // DPR-friendly sizing
+ 
   function fitCanvas() {
     const rect = canvas.getBoundingClientRect();
     const dpr = Math.max(1, window.devicePixelRatio || 1);
@@ -31,10 +31,10 @@
   window.addEventListener('resize', initCanvasSize);
   initCanvasSize();
 
-  // Game state
+
   let game = { running: false, paused: false, score: 0, lives: 3, level: 1 };
 
-  // Paddle
+
   const paddle = {
     wRatio: 0.18,
     width: 180,
@@ -45,16 +45,16 @@
     dragging: false
   };
 
-  // Ball
+  
   const ball = { r: 10, x: 0, y: 0, vx: 0, vy: 0, speed: 6, stuck: true };
 
-  // Bricks + particles
+
   let bricks = [];
   let particles = [];
 
   const rand = (a, b) => Math.random() * (b - a) + a;
 
-  // Build bricks
+
   function buildBricks(level) {
     bricks = [];
     const cols = Math.min(10, 5 + level);
@@ -80,7 +80,7 @@
     }
   }
 
-  // Reset ball/paddle
+ 
   function resetBallAndPaddle(sticky = true) {
     const cw = canvas.clientWidth || canvas.width;
     const ch = canvas.clientHeight || canvas.height;
@@ -96,7 +96,7 @@
     ball.speed = 6 + (game.level - 1) * 0.6;
   }
 
-  // Launch ball
+
   function launchBall() {
     if (!ball.stuck) return;
     ball.stuck = false;
@@ -105,7 +105,6 @@
     ball.vy = ball.speed * Math.sin(angle);
   }
 
-  // Physics
   function updatePhysics(dt) {
     if (game.paused || !game.running) return;
     const cw = canvas.clientWidth || canvas.width;
@@ -119,13 +118,12 @@
       ball.y = paddle.y - ball.r - 6;
     }
 
-    // Walls
     if (ball.x - ball.r <= 0 || ball.x + ball.r >= cw) {
       ball.vx *= -1;
     }
     if (ball.y - ball.r <= 0) ball.vy *= -1;
 
-    // Miss
+ 
     if (ball.y - ball.r > ch) {
       game.lives--;
       updateHUD();
@@ -136,7 +134,7 @@
       return;
     }
 
-    // Paddle collision
+   
     if (circleRectCollide(ball, paddle)) {
       const hitPos = (ball.x - (paddle.x + paddle.width / 2)) / (paddle.width / 2);
       const bounceAngle = hitPos * (Math.PI / 2.2) - Math.PI / 2;
@@ -146,7 +144,7 @@
       if (ball.vy > 0) ball.vy *= -1;
     }
 
-    // Bricks
+    
     for (let i = bricks.length - 1; i >= 0; i--) {
       const b = bricks[i];
       if (circleRectCollide(ball, b)) {
@@ -170,7 +168,7 @@
     }
   }
 
-  // Collision check
+
   function circleRectCollide(circle, rect) {
     const cx = circle.x, cy = circle.y;
     const rx = rect.x, ry = rect.y;
@@ -181,7 +179,7 @@
     return dx * dx + dy * dy <= circle.r * circle.r;
   }
 
-  // Render
+
   function render() {
     const cw = canvas.clientWidth || canvas.width;
     const ch = canvas.clientHeight || canvas.height;
@@ -202,14 +200,14 @@
     ctx.fill();
   }
 
-  // HUD
+  
   function updateHUD() {
     scoreEl.textContent = `Score: ${game.score}`;
     livesEl.textContent = `Lives: ${game.lives}`;
     levelEl.textContent = `Level: ${game.level}`;
   }
 
-  // Launch handler
+ 
   function handleLaunch() {
     if (!game.running) {
       overlay.style.display = 'none';
@@ -219,7 +217,7 @@
     if (ball.stuck) launchBall();
   }
 
-  // Input (keyboard)
+  
   const keys = { left: false, right: false };
   window.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = true;
@@ -231,7 +229,6 @@
     if (e.key === 'ArrowRight' || e.key === 'd') keys.right = false;
   });
 
-  // Mouse
   let lastPointerX = 0;
   canvas.addEventListener('mousedown', e => {
     lastPointerX = e.clientX - canvas.getBoundingClientRect().left;
@@ -247,7 +244,7 @@
   });
   window.addEventListener('mouseup', () => paddle.dragging = false);
 
-  // Touch (tap vs drag)
+
   let touchStartX = 0, touchMoved = false;
   canvas.addEventListener('touchstart', e => {
     touchMoved = false;
@@ -307,7 +304,7 @@
     });
   }
 
-  // Game control
+
   function startGame() {
     game.running = true;
     game.paused = false;
@@ -327,7 +324,7 @@
     game.paused = false;
   }
 
-  // Loop
+
   let lastTime = 0;
   function loop(ts) {
     if (!lastTime) lastTime = ts;
@@ -342,7 +339,6 @@
     requestAnimationFrame(loop);
   }
 
-  // Init
   function adjustAndStart() {
     initCanvasSize();
     buildBricks(game.level);
